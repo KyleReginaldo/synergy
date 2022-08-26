@@ -13,6 +13,7 @@ import 'dependency.dart';
 
 void main() async {
   print('clone try');
+  print('clone try');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await init();
