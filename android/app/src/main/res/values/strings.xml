@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+
+    <string name="facebook_app_id">1273597110075063</string>
+
+    <string name="fb_login_protocol_scheme">fb1273597110075063</string>
+
+    <string name="facebook_client_token">EAASGVG9VPrcBAG77MVwoCayX0MuI22We0xXADSDXSs8UjHv0Sq0HvC7ZBeIqEOMXuscZBeZAxe5syISZBF2u3GBYjtYolAxD4Sbk6UZAoWbbNh9nIHfZB1JG58O6qC4ZBkYEvufd0sz93to1TZBgsoX8uX1DIHLgXo3A7tBmEem8AmSWVnTPZBgAMZBz1gIUQeK4LflVYiuu27XlImZByHWISG0WDFGZBgdowfgZD</string>
+
+    <string name="app_name">Media App</string>
+
+</resources>

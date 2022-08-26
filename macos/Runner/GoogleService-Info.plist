@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>696570686436-g4u34ec36al91ru606pp2knv5aoo03nr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.696570686436-g4u34ec36al91ru606pp2knv5aoo03nr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7KpbWAkdsrhrX43CLd4m01HNJRGz56sc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>696570686436</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.synergy</string>
+	<key>PROJECT_ID</key>
+	<string>synergy-f8235</string>
+	<key>STORAGE_BUCKET</key>
+	<string>synergy-f8235.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:696570686436:ios:93039da7de71cbe49cb5f1</string>
+</dict>
+</plist>

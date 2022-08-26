@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "696570686436",
+    "project_id": "synergy-f8235",
+    "storage_bucket": "synergy-f8235.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696570686436:android:b3d12e98a41a90ec9cb5f1",
+        "android_client_info": {
+          "package_name": "com.example.synergy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696570686436-f6jfgj3qubtgus42jue91n6l6if82ueu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxEaMDFoNq8ygc8YYKMhYRsGmLHVJ02qU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696570686436-f6jfgj3qubtgus42jue91n6l6if82ueu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "696570686436-e4thgp4tmtn74qmro33g97anhj7md9cf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.instagramClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
