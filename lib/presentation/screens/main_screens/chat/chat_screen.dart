@@ -2,11 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
-import 'package:synergy/presentation/cubits/chat/chat_cubit.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
-import 'package:synergy/presentation/screens/main_screens/chat/chatroom_screen.dart';
-import 'package:timeago/timeago.dart' as timeago;
-import '../../../../dependency.dart';
+import 'package:synergy/presentation/widgets/chat/chat_heading_container.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -26,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -33,6 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -53,49 +52,20 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ],
             ),
+            const Padding(
+              padding: EdgeInsets.only(top: 20, left: 20, bottom: 10),
+              child: CustomText(
+                'Message',
+                weight: FontWeight.w600,
+              ),
+            ),
             BlocBuilder<UsersCubit, UsersState>(
               builder: (context, state) {
                 if (state is SearchLoaded) {
                   return Column(
                     children: state.users.map((e) {
                       return e.uid != FirebaseAuth.instance.currentUser!.uid
-                          ? ListTile(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MultiBlocProvider(
-                                      providers: [
-                                        BlocProvider<UsersCubit>(
-                                          create: (context) => sl<UsersCubit>(),
-                                        ),
-                                        BlocProvider<ChatCubit>(
-                                          create: (context) => sl<ChatCubit>(),
-                                        ),
-                                      ],
-                                      child: ChatRoomScreen(
-                                        friendName: e.fullname,
-                                        friendUid: e.uid,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              title: CustomText(e.fullname),
-                              leading: ClipOval(
-                                child: Image.network(
-                                  e.url,
-                                  height: 32,
-                                ),
-                              ),
-                              subtitle: CustomText(
-                                timeago.format(
-                                  DateTime.parse(e.lastLogin),
-                                ),
-                              ),
-                              trailing:
-                                  const Icon(Icons.arrow_forward_ios_rounded),
-                            )
+                          ? ChatHeadingContainer(e: e)
                           : const SizedBox.shrink();
                     }).toList(),
                   );

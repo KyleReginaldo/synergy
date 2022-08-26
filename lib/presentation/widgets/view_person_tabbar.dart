@@ -68,9 +68,12 @@ class _ProfileTabBarState extends State<ViewPersonTabbar> {
                       crossAxisCount: 3,
                       children: state.posts
                           .map(
-                            (e) => Image.network(
-                              e.postUrl,
-                              fit: BoxFit.cover,
+                            (e) => Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Image.network(
+                                e.postUrl,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           )
                           .toList(),

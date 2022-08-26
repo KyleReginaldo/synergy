@@ -13,12 +13,15 @@ import 'package:synergy/presentation/screens/main_screens/comment_screen.dart';
 import '../../dependency.dart';
 import '../cubits/comment/comment_cubit.dart';
 import '../cubits/users/users_cubit.dart';
+import 'animation/heart_animation_screen.dart';
 
 class PostContainer extends StatefulWidget {
   final PostEntity post;
+  
   const PostContainer({
     Key? key,
     required this.post,
+    
   }) : super(key: key);
 
   @override
@@ -26,6 +29,7 @@ class PostContainer extends StatefulWidget {
 }
 
 class _PostContainerState extends State<PostContainer> {
+  bool isHeartAnimation = false;
   bool isFavorite() {
     final isFav = widget.post.likes.where((element) {
       final like = element.contains(FirebaseAuth.instance.currentUser!.uid);
@@ -157,17 +161,35 @@ class _PostContainerState extends State<PostContainer> {
           ),
           InkWell(
             onDoubleTap: () {
+              setState(() {
+                isHeartAnimation = true;
+              });
+
               context.read<PostsCubit>().likePost(widget.post.postId,
                   FirebaseAuth.instance.currentUser!.uid, widget.post.likes);
             },
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 8),
-              height: 300,
-              color: Colors.black.withOpacity(0.05),
+              height: 400,
+              decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.05),
+                  image: DecorationImage(
+                      image: NetworkImage(widget.post.postUrl))),
               width: double.infinity,
-              child: Image.network(
-                widget.post.postUrl,
-                fit: BoxFit.fitHeight,
+              child: Opacity(
+                opacity: isHeartAnimation ? 1 : 0,
+                child: HeartAnimationWidget(
+                  isAnimating: isHeartAnimation,
+                  duration: const Duration(milliseconds: 700),
+                  onEnd: () => setState(() {
+                    isHeartAnimation = false;
+                  }),
+                  child: const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                    size: 80,
+                  ),
+                ),
               ),
             ),
           ),

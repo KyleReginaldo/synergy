@@ -36,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: state.posts
                     .map(
-                      (e) => PostContainer(post: e),
+                      (e) => PostContainer(
+                        post: e,
+                      ),
                     )
                     .toList(),
               ),

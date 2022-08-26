@@ -69,7 +69,7 @@ class _ProfileTabBarState extends State<ProfileTabBar> {
                       children: state.posts
                           .map(
                             (e) => Padding(
-                              padding: const EdgeInsets.all(2),
+                              padding: const EdgeInsets.all(5),
                               child: Image.network(
                                 e.postUrl,
                                 fit: BoxFit.cover,

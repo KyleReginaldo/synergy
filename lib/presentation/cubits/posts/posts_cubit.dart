@@ -25,11 +25,14 @@ class PostsCubit extends Cubit<PostsState> {
   void fetchPosts() async {
     emit(Loading());
     final postStream = _fetchPosts();
+
     postStream.listen((event) {
       if (event.isEmpty) {
         emit(Empty());
       } else {
-        emit(Loaded(posts: event));
+        emit(Loaded(
+          posts: event,
+        ));
       }
     });
   }
@@ -41,6 +44,7 @@ class PostsCubit extends Cubit<PostsState> {
   void getPost(String uid) async {
     emit(Loading());
     final post = await _getPost(uid);
+
     emit(PostLoaded(post: post));
   }
 

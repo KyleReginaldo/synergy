@@ -7,6 +7,7 @@ class PostsInitial extends PostsState {}
 
 class Loaded extends PostsState {
   final List<PostEntity> posts;
+
   Loaded({
     required this.posts,
   });
@@ -21,6 +22,7 @@ class UserPostLoaded extends PostsState {
 
 class PostLoaded extends PostsState {
   final PostEntity post;
+
   PostLoaded({
     required this.post,
   });
