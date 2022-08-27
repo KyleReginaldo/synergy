@@ -35,6 +35,7 @@ class _ProfileScreenState extends State<ViewPersonScreen>
   void followingFilter(uid) {
     final follow = widget.user.followers;
     if (follow.contains(uid)) {
+      print(follow);
       setState(() {
         isFollowing = !isFollowing;
       });
