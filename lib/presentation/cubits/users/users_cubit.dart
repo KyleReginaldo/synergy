@@ -44,11 +44,13 @@ class UsersCubit extends Cubit<UsersState> {
     emit(UsersLoading());
     final usersStream = _searchUsers(query);
     usersStream.listen((event) {
-      if (event.isEmpty) {
-        emit(UsersEmpty());
-      } else {
-        emit(SearchLoaded(users: event));
-      }
+      Future.delayed(const Duration(seconds: 1), () {
+        if (event.isEmpty) {
+          emit(UsersEmpty());
+        } else {
+          emit(SearchLoaded(users: event));
+        }
+      });
     });
   }
 

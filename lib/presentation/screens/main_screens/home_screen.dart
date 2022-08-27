@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
+import 'package:lottie/lottie.dart';
 import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 
 import '../../widgets/post_container.dart';
@@ -45,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         } else if (state is Loading) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Lottie.asset('assets/loading.json', height: 128),
           );
         } else if (state is Empty) {
           return const Center(

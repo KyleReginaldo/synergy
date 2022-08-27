@@ -25,6 +25,7 @@ class SearchLoadedContainer extends StatelessWidget {
             ? const SizedBox.shrink()
             : ListTile(
                 onTap: () async {
+                  print(e.fullname);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => MultiBlocProvider(

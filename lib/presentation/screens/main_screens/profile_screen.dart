@@ -35,7 +35,8 @@ class _ProfileScreenState extends State<ProfileScreen>
           child: Column(
             children: [
               const ProfileContainer(),
-              GestureDetector(
+              const SizedBox(height: 32),
+              BtnFilled(
                 onTap: () {
                   Navigator.push(
                       context,
@@ -47,21 +48,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 child: const EditProfileScreen(),
                               )));
                 },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 16),
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(8),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade300.withOpacity(0.6),
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const CustomText(
-                    'Edit Profile',
-                    weight: FontWeight.w500,
-                    size: 16,
-                  ),
-                ),
-              )
+                text: 'edit profile',
+                color: Colors.black,
+                radius: 4,
+                width: MediaQuery.of(context).size.width,
+              ),
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,22 +28,32 @@ class _ProfileScreenState extends State<ViewPersonScreen>
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
-    context.read<UsersCubit>().fetchUser(widget.uid);
+    getData();
     super.initState();
   }
 
-  bool isFollowing = true;
-  void followingFilter(uid) {
-    final follow = widget.user.followers;
-    if (follow.contains(uid)) {
-      print(follow);
+  bool isFollowing = false;
+  getData() async {
+    try {
+      var userSnap = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.uid)
+          .get();
+
       setState(() {
-        isFollowing = !isFollowing;
+        isFollowing = userSnap
+            .data()!['followers']
+            .contains(FirebaseAuth.instance.currentUser!.uid);
       });
+      print(
+        userSnap
+            .data()!['followers']
+            .contains(FirebaseAuth.instance.currentUser!.uid),
+      );
+    } catch (e) {
+      print(e);
     }
   }
-
-  bool followFilter(String uid) => widget.user.followers.contains(uid);
 
   @override
   Widget build(BuildContext context) {
@@ -58,61 +69,72 @@ class _ProfileScreenState extends State<ViewPersonScreen>
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                const ProfileContainer(),
+                ProfileContainer(
+                  uid: widget.uid,
+                ),
                 const SizedBox(height: 18),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () async {
-                        context.read<UsersCubit>().follow(
-                              myId: FirebaseAuth.instance.currentUser!.uid,
-                              uid: widget.uid,
-                            );
-                        followingFilter(FirebaseAuth.instance.currentUser!.uid);
-                      },
-                      child: Container(
-                        width: 130,
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: Colors.black),
-                        ),
-                        child: Center(
-                          child: isFollowing
-                              ? const CustomText('unfollow')
-                              : const CustomText('follow'),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MultiBlocProvider(
-                              providers: [
-                                BlocProvider<UsersCubit>(
-                                  create: (context) => sl<UsersCubit>(),
+                    isFollowing
+                        ? BtnFilled(
+                            onTap: () async {
+                              context.read<UsersCubit>().follow(
+                                    myId:
+                                        FirebaseAuth.instance.currentUser!.uid,
+                                    uid: widget.uid,
+                                  );
+
+                              setState(() {
+                                isFollowing = false;
+                              });
+                            },
+                            text: 'unfollow',
+                            radius: 4,
+                            color: Colors.black,
+                          )
+                        : BtnFilled(
+                            onTap: () async {
+                              context.read<UsersCubit>().follow(
+                                    myId:
+                                        FirebaseAuth.instance.currentUser!.uid,
+                                    uid: widget.uid,
+                                  );
+                              setState(() {
+                                isFollowing = true;
+                              });
+                            },
+                            text: 'follow',
+                            radius: 4,
+                            color: Colors.black,
+                          ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: BtnFilled(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MultiBlocProvider(
+                                providers: [
+                                  BlocProvider<UsersCubit>(
+                                    create: (context) => sl<UsersCubit>(),
+                                  ),
+                                  BlocProvider<ChatCubit>(
+                                    create: (context) => sl<ChatCubit>(),
+                                  ),
+                                ],
+                                child: ChatRoomScreen(
+                                  friendName: widget.user.fullname,
+                                  friendUid: widget.user.uid,
                                 ),
-                                BlocProvider<ChatCubit>(
-                                  create: (context) => sl<ChatCubit>(),
-                                ),
-                              ],
-                              child: ChatRoomScreen(
-                                friendName: widget.user.fullname,
-                                friendUid: widget.user.uid,
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: 240,
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: Colors.black),
-                        ),
-                        child: const Center(child: CustomText('Message')),
+                          );
+                        },
+                        text: 'message',
+                        radius: 4,
+                        color: Colors.black,
                       ),
                     ),
                   ],

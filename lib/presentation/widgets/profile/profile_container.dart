@@ -6,8 +6,10 @@ import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProfileContainer extends StatefulWidget {
+  final String? uid;
   const ProfileContainer({
     Key? key,
+    this.uid,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
   void initState() {
     context
         .read<UsersCubit>()
-        .fetchUser(FirebaseAuth.instance.currentUser!.uid);
+        .fetchUser(widget.uid ?? FirebaseAuth.instance.currentUser!.uid);
     super.initState();
   }
 

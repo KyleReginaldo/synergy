@@ -27,6 +27,7 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   File? file;
   String name = '';
+  bool isLoading = false;
 
   Future<void> pickFile() async {
     final result = await FilePicker.platform.pickFiles(
@@ -36,9 +37,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
     print('name : ${result!.names}');
     if (result != null) {
+      setState(() {
+        isLoading = true;
+      });
       final image = await saveFile(result.files.first);
       name = result.names.first!;
       setState(() {
+        isLoading = false;
         file = image;
       });
     } else {
@@ -138,18 +143,25 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       ),
                     ],
                   ),
-                  const Spacer(),
                   const SizedBox(height: 16),
-                  file != null
-                      ? Image.file(
-                          file!,
-                          height: 420,
-                          width: double.infinity,
-                          fit: BoxFit.fitHeight,
-                        )
-                      : const CustomText(
-                          'Upload image to level up your content.',
-                        ),
+                  if (file != null)
+                    SizedBox(
+                      width: double.infinity,
+                      child: isLoading
+                          ? const CircularProgressIndicator()
+                          : Image.file(
+                              file!,
+                              height: 420,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                    )
+                  else
+                    isLoading
+                        ? const CircularProgressIndicator()
+                        : const CustomText(
+                            'Upload image to level up your content.',
+                          ),
                   const Spacer(),
                 ],
               ),

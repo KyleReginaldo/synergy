@@ -5,8 +5,6 @@ import 'package:lottie/lottie.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 import 'package:synergy/presentation/widgets/searchloaded_container.dart';
 
-import '../../cubits/posts/posts_cubit.dart';
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -16,12 +14,6 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final controller = TextEditingController();
-  @override
-  void initState() {
-    context.read<PostsCubit>().fetchPosts();
-    context.read<UsersCubit>().searchUsers('---');
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,20 +41,22 @@ class _SearchScreenState extends State<SearchScreen> {
               if (state is SearchLoaded) {
                 return SearchLoadedContainer(users: state.users);
               } else if (state is UsersLoading) {
-                return const Center(
-                  child: CustomText('Loading...'),
+                return Center(
+                  child: Lottie.asset('assets/loading.json', height: 128),
                 );
               } else if (state is UsersEmpty) {
-                return Column(
-                  children: [
-                    Lottie.asset('assets/find.json', height: 220),
-                    const CustomText(
-                      'Find people to interact with.',
-                    ),
-                  ],
+                return const Center(
+                  child: CustomText('empty.'),
                 );
               }
-              return const SizedBox.shrink();
+              return Column(
+                children: [
+                  Lottie.asset('assets/find.json', height: 220),
+                  const CustomText(
+                    'Find people to interact with.',
+                  ),
+                ],
+              );
             },
           ),
         ],

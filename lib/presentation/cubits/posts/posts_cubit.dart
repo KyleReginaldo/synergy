@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:synergy/domain/usecase/fetchuserposts.dart';
 import 'package:synergy/domain/usecase/getpost.dart';
 import 'package:synergy/domain/usecase/likepost.dart';
-import 'package:meta/meta.dart';
 
 import 'package:synergy/domain/entity/post_entity.dart';
 import 'package:synergy/domain/usecase/fetchposts.dart';
@@ -27,13 +27,15 @@ class PostsCubit extends Cubit<PostsState> {
     final postStream = _fetchPosts();
 
     postStream.listen((event) {
-      if (event.isEmpty) {
-        emit(Empty());
-      } else {
-        emit(Loaded(
-          posts: event,
-        ));
-      }
+      Future.delayed(const Duration(seconds: 2), () {
+        if (event.isEmpty) {
+          emit(Empty());
+        } else {
+          emit(Loaded(
+            posts: event,
+          ));
+        }
+      });
     });
   }
 
