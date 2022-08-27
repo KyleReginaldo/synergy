@@ -17,12 +17,16 @@ class ChatCubit extends Cubit<ChatState> {
     String chatUid,
     String userId,
     String friendName,
+    String recieverUrl,
+    String senderUrl,
   ) async {
     await _sendMessage(
       msg,
       chatUid,
       userId,
       friendName,
+      recieverUrl,
+      senderUrl,
     );
   }
 

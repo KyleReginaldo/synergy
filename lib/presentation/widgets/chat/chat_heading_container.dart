@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/widgets/text.dart';
@@ -32,6 +33,8 @@ class ChatHeadingContainer extends StatelessWidget {
               child: ChatRoomScreen(
                 friendName: e.fullname,
                 friendUid: e.uid,
+                friendUrl: e.url,
+                myUrl: FirebaseAuth.instance.currentUser!.photoURL ?? '',
               ),
             ),
           ),

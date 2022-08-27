@@ -24,6 +24,8 @@ abstract class Repository {
     String chatUid,
     String userId,
     String friendName,
+    String recieverUrl,
+    String senderUrl,
   );
   Stream<List<ChatEntity>> fetchChats(String chatUid);
   Stream<List<UserEntity>> fetchUsers();

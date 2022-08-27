@@ -146,9 +146,22 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<void> sendMessage(
-      String msg, String chatUid, String userId, String friendName) async {
+    String msg,
+    String chatUid,
+    String userId,
+    String friendName,
+    String recieverUrl,
+    String senderUrl,
+  ) async {
     try {
-      await remote.sendMessage(msg, chatUid, userId, friendName);
+      await remote.sendMessage(
+        msg,
+        chatUid,
+        userId,
+        friendName,
+        recieverUrl,
+        senderUrl,
+      );
     } on FirebaseException {
       rethrow;
     }

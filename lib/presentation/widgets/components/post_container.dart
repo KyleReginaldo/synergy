@@ -51,9 +51,31 @@ class _PostContainerState extends State<PostContainer> {
                 padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: 18,
-                      backgroundImage: NetworkImage(widget.post.profileImage),
+                    GestureDetector(
+                      onTap: () {
+                        //*wag muna galawin di pa ayos
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => MultiBlocProvider(
+                        //       providers: [
+                        //         BlocProvider<UsersCubit>(
+                        //           create: (context) => sl<UsersCubit>(),
+                        //         ),
+                        //         BlocProvider<PostsCubit>(
+                        //           create: (context) => sl<PostsCubit>(),
+                        //         ),
+                        //       ],
+                        //       child: ViewPersonScreen(
+                        //         uid: widget.post.uid,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // );
+                      },
+                      child: CircleAvatar(
+                        radius: 18,
+                        backgroundImage: NetworkImage(widget.post.profileImage),
+                      ),
                     ),
                     const SizedBox(width: 5),
                     Column(
@@ -65,7 +87,9 @@ class _PostContainerState extends State<PostContainer> {
                           size: 15,
                         ),
                         CustomText(
-                          timeago.format(DateTime.parse(widget.post.createdAt)),
+                          timeago.format(
+                            DateTime.parse(widget.post.createdAt),
+                          ),
                           size: 12,
                           color: Colors.grey,
                         ),

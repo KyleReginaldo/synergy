@@ -8,13 +8,18 @@ import 'package:general/general.dart';
 import 'package:lottie/lottie.dart';
 import 'package:synergy/presentation/cubits/chat/chat_cubit.dart';
 import 'package:synergy/presentation/widgets/chat/current_user.dart';
-import 'package:synergy/presentation/widgets/chat/other_user.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   final String friendUid;
   final String friendName;
+  final String friendUrl;
+  final String myUrl;
   const ChatRoomScreen(
-      {Key? key, required this.friendUid, required this.friendName})
+      {Key? key,
+      required this.friendUid,
+      required this.friendName,
+      required this.friendUrl,
+      required this.myUrl})
       : super(key: key);
 
   @override
@@ -95,13 +100,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                       reverse: true,
                       children: chats
                           .map(
-                            (e) => Align(
-                                alignment: e.uid != currentUserId
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
-                                child: e.uid != currentUserId
-                                    ? GestureDetector(child: CurrentUser(e: e))
-                                    : OtherUser(e: e)),
+                            (e) => CurrentUser(e: e),
                           )
                           .toList(),
                     );
@@ -138,6 +137,8 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                           chatDocId,
                           widget.friendUid,
                           widget.friendName,
+                          widget.friendUrl,
+                          widget.myUrl,
                         );
                     message.clear();
                   },
