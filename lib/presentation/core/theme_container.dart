@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:synergy/presentation/screens/setting_screens/profile_settings_info/theme/theme_provider.dart';
+import 'package:synergy/core/theme/theme_provider.dart';
 
 class ThemeController extends StatelessWidget {
   const ThemeController({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:general/general.dart';
-import 'package:synergy/presentation/screens/setting_screens/profile_settings_info/theme/theme_container.dart';
+import 'package:synergy/presentation/core/theme_container.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);

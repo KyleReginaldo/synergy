@@ -13,7 +13,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 
-import '../../../core/firebase_storage.dart';
+import '../../../core/global/firebase_storage.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({

@@ -5,7 +5,7 @@ import 'package:synergy/presentation/cubits/comment/comment_cubit.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 
 import '../../../domain/entity/comment_entity.dart';
-import '../../widgets/custom/comment_container.dart';
+import '../../widgets/components/comment_container.dart';
 
 class CommentScreen extends StatefulWidget {
   final String uid;

@@ -21,7 +21,6 @@ PreferredSizeWidget? buildAppbar(int index, BuildContext context) {
       return AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
         title: Image.asset(
           'assets/syncolor.png',
           height: 60,

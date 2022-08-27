@@ -31,6 +31,8 @@ abstract class RemoteDataSource {
     String chatUid,
     String userId,
     String friendName,
+    String recieverUrl,
+    String senderUrl,
   );
   Stream<List<ChatModel>> fetchChats(String chatUid);
   Stream<List<UserModel>> fetchUsers();
@@ -241,13 +243,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     String chatUid,
     String userId,
     String friendName,
+    String recieverUrl,
+    String senderUrl,
   ) async {
     if (msg == '') return;
     await _db.collection('chats').doc(chatUid).collection('messages').add({
       'createdOn': DateTime.now().toString(),
       'uid': userId,
       'friendName': friendName,
-      'msg': msg
+      'msg': msg,
+      'recieverUrl': recieverUrl,
+      'senderUrl': senderUrl,
     }).then((value) {
       '';
     });

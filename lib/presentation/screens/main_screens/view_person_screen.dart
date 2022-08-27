@@ -9,15 +9,14 @@ import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 import '../../../dependency.dart';
 import '../../cubits/chat/chat_cubit.dart';
 
-import '../../widgets/custom/view_person_tabbar.dart';
+import '../../widgets/view_person_tabbar.dart';
 import '../../widgets/profile/profile_container.dart';
 import 'chat/chatroom_screen.dart';
 
 class ViewPersonScreen extends StatefulWidget {
-  final String uid;
-  final UserEntity user;
-  const ViewPersonScreen({Key? key, required this.uid, required this.user})
-      : super(key: key);
+  final String? uid;
+  final UserEntity? user;
+  const ViewPersonScreen({Key? key, this.uid, this.user}) : super(key: key);
 
   @override
   State<ViewPersonScreen> createState() => _ProfileScreenState();
@@ -78,7 +77,7 @@ class _ProfileScreenState extends State<ViewPersonScreen>
                               context.read<UsersCubit>().follow(
                                     myId:
                                         FirebaseAuth.instance.currentUser!.uid,
-                                    uid: widget.uid,
+                                    uid: widget.uid ?? "",
                                   );
 
                               setState(() {
@@ -94,7 +93,7 @@ class _ProfileScreenState extends State<ViewPersonScreen>
                               context.read<UsersCubit>().follow(
                                     myId:
                                         FirebaseAuth.instance.currentUser!.uid,
-                                    uid: widget.uid,
+                                    uid: widget.uid ?? "",
                                   );
                               setState(() {
                                 isFollowing = true;
@@ -121,8 +120,12 @@ class _ProfileScreenState extends State<ViewPersonScreen>
                                   ),
                                 ],
                                 child: ChatRoomScreen(
-                                  friendName: widget.user.fullname,
-                                  friendUid: widget.user.uid,
+                                  friendName: widget.user?.fullname ?? "",
+                                  friendUid: widget.user?.uid ?? "",
+                                  friendUrl: widget.user?.url ?? "",
+                                  myUrl: FirebaseAuth
+                                          .instance.currentUser!.photoURL ??
+                                      '',
                                 ),
                               ),
                             ),
@@ -141,7 +144,7 @@ class _ProfileScreenState extends State<ViewPersonScreen>
           const SizedBox(height: 40),
           ViewPersonTabbar(
             controller: _tabController,
-            uid: widget.uid,
+            uid: widget.uid ?? "",
           )
         ],
       ),

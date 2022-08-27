@@ -4,7 +4,7 @@ import 'package:general/general.dart';
 import 'package:lottie/lottie.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 
-import '../../widgets/custom/searchloaded_container.dart';
+import '../../widgets/searchloaded_container.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

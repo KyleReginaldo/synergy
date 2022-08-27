@@ -11,7 +11,16 @@ class SendMessage {
     String chatUid,
     String userId,
     String friendName,
+    String recieverUrl,
+    String senderUrl,
   ) async {
-    await repo.sendMessage(msg, chatUid, userId, friendName);
+    await repo.sendMessage(
+      msg,
+      chatUid,
+      userId,
+      friendName,
+      recieverUrl,
+      senderUrl,
+    );
   }
 }

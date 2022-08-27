@@ -6,7 +6,7 @@ import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 import 'package:synergy/presentation/screens/main_screens/edit_profile_screen.dart';
 
 import '../../../dependency.dart';
-import '../../widgets/custom/tabbar.dart';
+import '../../widgets/tabbar.dart';
 import '../../widgets/profile/profile_container.dart';
 
 class ProfileScreen extends StatefulWidget {
