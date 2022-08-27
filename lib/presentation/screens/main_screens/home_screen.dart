@@ -4,7 +4,7 @@ import 'package:general/general.dart';
 import 'package:lottie/lottie.dart';
 import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 
-import '../../widgets/post_container.dart';
+import '../../widgets/custom/post_container.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

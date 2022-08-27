@@ -5,11 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
 import 'package:synergy/domain/entity/user_entity.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
-import 'package:synergy/presentation/widgets/profile/profile_container.dart';
-import 'package:synergy/presentation/widgets/view_person_tabbar.dart';
 
 import '../../../dependency.dart';
 import '../../cubits/chat/chat_cubit.dart';
+
+import '../../widgets/custom/view_person_tabbar.dart';
+import '../../widgets/profile/profile_container.dart';
 import 'chat/chatroom_screen.dart';
 
 class ViewPersonScreen extends StatefulWidget {
@@ -45,13 +46,8 @@ class _ProfileScreenState extends State<ViewPersonScreen>
             .data()!['followers']
             .contains(FirebaseAuth.instance.currentUser!.uid);
       });
-      print(
-        userSnap
-            .data()!['followers']
-            .contains(FirebaseAuth.instance.currentUser!.uid),
-      );
-    } catch (e) {
-      print(e);
+    } on Exception {
+      rethrow;
     }
   }
 

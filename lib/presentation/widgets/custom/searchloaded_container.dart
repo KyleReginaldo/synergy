@@ -6,9 +6,9 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:synergy/domain/entity/user_entity.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 
-import '../../dependency.dart';
-import '../cubits/posts/posts_cubit.dart';
-import '../screens/main_screens/view_person_screen.dart';
+import '../../../dependency.dart';
+import '../../cubits/posts/posts_cubit.dart';
+import '../../screens/main_screens/view_person_screen.dart';
 
 class SearchLoadedContainer extends StatelessWidget {
   final List<UserEntity> users;
@@ -25,7 +25,6 @@ class SearchLoadedContainer extends StatelessWidget {
             ? const SizedBox.shrink()
             : ListTile(
                 onTap: () async {
-                  print(e.fullname);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => MultiBlocProvider(

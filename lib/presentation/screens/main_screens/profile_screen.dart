@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
 import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 import 'package:synergy/presentation/screens/main_screens/edit_profile_screen.dart';
-import 'package:synergy/presentation/widgets/profile/profile_container.dart';
-import 'package:synergy/presentation/widgets/tabbar.dart';
 
 import '../../../dependency.dart';
+import '../../widgets/custom/tabbar.dart';
+import '../../widgets/profile/profile_container.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

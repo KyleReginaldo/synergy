@@ -9,11 +9,11 @@ import 'package:synergy/presentation/cubits/chat/chat_cubit.dart';
 import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 import 'package:synergy/presentation/screens/main_screens/addpost_screen.dart';
-import 'package:synergy/presentation/widgets/profile/profile_bottom_sheet.dart';
 
 import '../../dependency.dart';
 import '../../presentation/screens/main_screens/chat/chat_screen.dart';
 import '../../presentation/screens/main_screens/notification_screen.dart';
+import '../../presentation/widgets/profile/profile_bottom_sheet.dart';
 
 PreferredSizeWidget? buildAppbar(int index, BuildContext context) {
   switch (index) {

@@ -3,7 +3,7 @@ import 'package:general/general.dart';
 import 'package:synergy/domain/entity/comment_entity.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-import '../../domain/entity/post_entity.dart';
+import '../../../domain/entity/post_entity.dart';
 
 class CommentContainer extends StatefulWidget {
   final CommentEntity comment;

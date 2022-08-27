@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
 
-import '../cubits/posts/posts_cubit.dart';
+import '../../cubits/posts/posts_cubit.dart';
 
 class SearchImageContainer extends StatefulWidget {
   const SearchImageContainer({Key? key}) : super(key: key);
