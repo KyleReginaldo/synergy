@@ -10,18 +10,17 @@ import 'package:synergy/domain/entity/post_entity.dart';
 import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 import 'package:synergy/presentation/screens/main_screens/comment_screen.dart';
 
-import '../../dependency.dart';
-import '../cubits/comment/comment_cubit.dart';
-import '../cubits/users/users_cubit.dart';
-import 'animation/heart_animation_screen.dart';
+import '../../../dependency.dart';
+import '../../cubits/comment/comment_cubit.dart';
+import '../../cubits/users/users_cubit.dart';
+import '../animation/heart_animation_screen.dart';
 
 class PostContainer extends StatefulWidget {
   final PostEntity post;
-  
+
   const PostContainer({
     Key? key,
     required this.post,
-    
   }) : super(key: key);
 
   @override
@@ -239,10 +238,12 @@ class _PostContainerState extends State<PostContainer> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: CustomText(
-              '${widget.post.likes.length.toString()} likes',
-              weight: FontWeight.w600,
-            ),
+            child: widget.post.likes.length <= 1
+                ? CustomText('${widget.post.likes.length.toString()} like')
+                : CustomText(
+                    '${widget.post.likes.length.toString()} likes',
+                    weight: FontWeight.w600,
+                  ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
