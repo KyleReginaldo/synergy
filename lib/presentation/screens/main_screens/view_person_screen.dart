@@ -7,6 +7,10 @@ import 'package:synergy/presentation/cubits/users/users_cubit.dart';
 import 'package:synergy/presentation/widgets/profile/profile_container.dart';
 import 'package:synergy/presentation/widgets/view_person_tabbar.dart';
 
+import '../../../dependency.dart';
+import '../../cubits/chat/chat_cubit.dart';
+import 'chat/chatroom_screen.dart';
+
 class ViewPersonScreen extends StatefulWidget {
   final String uid;
   final UserEntity user;
@@ -24,8 +28,18 @@ class _ProfileScreenState extends State<ViewPersonScreen>
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     context.read<UsersCubit>().fetchUser(widget.uid);
-    print(followFilter(FirebaseAuth.instance.currentUser!.uid));
     super.initState();
+  }
+
+  bool isFollowing = true;
+  void followingFilter(uid) {
+    final follow = widget.user.followers;
+    if (follow.contains(uid)) {
+      print(follow);
+      setState(() {
+        isFollowing = !isFollowing;
+      });
+    }
   }
 
   bool followFilter(String uid) => widget.user.followers.contains(uid);
@@ -45,21 +59,68 @@ class _ProfileScreenState extends State<ViewPersonScreen>
             child: Column(
               children: [
                 const ProfileContainer(),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () async {
-                    context.read<UsersCubit>().follow(
-                          myId: FirebaseAuth.instance.currentUser!.uid,
-                          uid: widget.uid,
+                const SizedBox(height: 18),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        context.read<UsersCubit>().follow(
+                              myId: FirebaseAuth.instance.currentUser!.uid,
+                              uid: widget.uid,
+                            );
+                        followingFilter(FirebaseAuth.instance.currentUser!.uid);
+                      },
+                      child: Container(
+                        width: 130,
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.black),
+                        ),
+                        child: Center(
+                          child: isFollowing
+                              ? const CustomText('unfollow')
+                              : const CustomText('follow'),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MultiBlocProvider(
+                              providers: [
+                                BlocProvider<UsersCubit>(
+                                  create: (context) => sl<UsersCubit>(),
+                                ),
+                                BlocProvider<ChatCubit>(
+                                  create: (context) => sl<ChatCubit>(),
+                                ),
+                              ],
+                              child: ChatRoomScreen(
+                                friendName: widget.user.fullname,
+                                friendUid: widget.user.uid,
+                              ),
+                            ),
+                          ),
                         );
-                  },
-                  child: followFilter(FirebaseAuth.instance.currentUser!.uid)
-                      ? const CustomText('unfollow')
-                      : const CustomText('follow'),
+                      },
+                      child: Container(
+                        width: 240,
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.black),
+                        ),
+                        child: const Center(child: CustomText('Message')),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
           ),
+          const SizedBox(height: 40),
           ViewPersonTabbar(
             controller: _tabController,
             uid: widget.uid,

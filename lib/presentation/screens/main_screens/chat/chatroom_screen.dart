@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
 import 'package:lottie/lottie.dart';
 import 'package:synergy/presentation/cubits/chat/chat_cubit.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:synergy/presentation/widgets/chat/current_user.dart';
+import 'package:synergy/presentation/widgets/chat/other_user.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   final String friendUid;
@@ -65,7 +66,6 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   void initState() {
     checkUser();
-
     super.initState();
   }
 
@@ -73,9 +73,13 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: CustomText(widget.friendName),
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: CustomText(
+          widget.friendName,
+          color: Colors.black,
+        ),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Padding(
@@ -95,40 +99,9 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                                 alignment: e.uid != currentUserId
                                     ? Alignment.centerRight
                                     : Alignment.centerLeft,
-                                child: Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  margin: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: e.uid != currentUserId
-                                        ? const Color(0xFF40E0D0)
-                                        : Colors.grey,
-                                    borderRadius: e.uid != currentUserId
-                                        ? const BorderRadius.only(
-                                            topLeft: Radius.circular(8),
-                                            topRight: Radius.circular(8),
-                                            bottomLeft: Radius.circular(8),
-                                          )
-                                        : const BorderRadius.only(
-                                            topLeft: Radius.circular(8),
-                                            topRight: Radius.circular(8),
-                                            bottomRight: Radius.circular(8),
-                                          ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: e.uid != currentUserId
-                                        ? CrossAxisAlignment.end
-                                        : CrossAxisAlignment.start,
-                                    children: [
-                                      CustomText(e.msg),
-                                      CustomText(
-                                        timeago.format(
-                                          DateTime.parse(e.createdOn),
-                                        ),
-                                        size: 10,
-                                      ),
-                                    ],
-                                  ),
-                                )),
+                                child: e.uid != currentUserId
+                                    ? GestureDetector(child: CurrentUser(e: e))
+                                    : OtherUser(e: e)),
                           )
                           .toList(),
                     );
@@ -150,9 +123,12 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             Row(
               children: [
                 Expanded(
-                  child: CustomTextField(
-                    'send message',
-                    controller: message,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: CustomTextField(
+                      'send message',
+                      controller: message,
+                    ),
                   ),
                 ),
                 IconButton(

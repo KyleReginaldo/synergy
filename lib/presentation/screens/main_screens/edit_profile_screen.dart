@@ -72,7 +72,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 Widget labelTextBuilder(String text) {
   return Padding(
-    padding: const EdgeInsets.all(5),
+    padding: const EdgeInsets.symmetric(vertical: 5),
     child: CustomText(
       text,
       size: 12,

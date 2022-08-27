@@ -27,7 +27,7 @@ class _LogInScreenState extends State<LogInScreen> {
             children: [
               const Spacer(),
               Image.asset(
-                'assets/syn.png',
+                'assets/syncolor.png',
                 height: 80,
               ),
               const SizedBox(height: 32),
