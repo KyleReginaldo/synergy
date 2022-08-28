@@ -99,87 +99,87 @@ class _PostContainerState extends State<PostContainer> {
                 ),
               ),
               IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 30),
-                              height: 250,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: const Icon(
-                                          Icons.share,
-                                          size: 30,
-                                        ),
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 30),
+                            height: 250,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1, color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: const Icon(
+                                        Icons.share,
+                                        size: 30,
                                       ),
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: const Icon(
-                                          Icons.link,
-                                          size: 30,
-                                        ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1, color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: const Icon(
+                                        Icons.link,
+                                        size: 30,
                                       ),
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: const Icon(
-                                          Icons.qr_code,
-                                          size: 30,
-                                        ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1, color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: const Icon(
+                                        Icons.qr_code,
+                                        size: 30,
                                       ),
-                                      Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1, color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: const Icon(
-                                          Icons.report_sharp,
-                                          color: Colors.red,
-                                          size: 30,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const CustomText('Dont show for this hashtag',
-                                      weight: FontWeight.w600),
-                                  const CustomText('Unfollow this hashtag',
-                                      weight: FontWeight.w600)
-                                ],
-                              ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 1, color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(50)),
+                                      child: const Icon(
+                                        Icons.report_sharp,
+                                        color: Colors.red,
+                                        size: 30,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const CustomText('Dont show for this hashtag',
+                                    weight: FontWeight.w600),
+                                const CustomText('Unfollow this hashtag',
+                                    weight: FontWeight.w600)
+                              ],
                             ),
-                          );
-                        });
-                  },
-                  icon: const Icon(Icons.more_vert)),
+                          ),
+                        );
+                      });
+                },
+                icon: const Icon(Icons.more_vert),
+              ),
             ],
           ),
           InkWell(
@@ -209,7 +209,7 @@ class _PostContainerState extends State<PostContainer> {
                   }),
                   child: const Icon(
                     Icons.favorite,
-                    color: Colors.red,
+                    color: Colors.black,
                     size: 80,
                   ),
                 ),
@@ -222,14 +222,15 @@ class _PostContainerState extends State<PostContainer> {
               InkWell(
                 onTap: () async {
                   context.read<PostsCubit>().likePost(
-                      widget.post.postId,
-                      FirebaseAuth.instance.currentUser!.uid,
-                      widget.post.likes);
+                        widget.post.postId,
+                        FirebaseAuth.instance.currentUser!.uid,
+                        widget.post.likes,
+                      );
                 },
                 child: isFavorite()
-                    ? Icon(
+                    ? const Icon(
                         Icons.favorite,
-                        color: Colors.red.shade700,
+                        color: Colors.black,
                       )
                     : const Icon(Icons.favorite_border),
               ),

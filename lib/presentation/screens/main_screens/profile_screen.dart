@@ -39,14 +39,15 @@ class _ProfileScreenState extends State<ProfileScreen>
               BtnFilled(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BlocProvider<PostsCubit>(
-                                create: (context) => sl<PostsCubit>()
-                                  ..getPost(
-                                      FirebaseAuth.instance.currentUser!.uid),
-                                child: const EditProfileScreen(),
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider<PostsCubit>(
+                        create: (context) => sl<PostsCubit>()
+                          ..getPost(FirebaseAuth.instance.currentUser!.uid),
+                        child: const EditProfileScreen(),
+                      ),
+                    ),
+                  );
                 },
                 text: 'edit profile',
                 color: Colors.black,
