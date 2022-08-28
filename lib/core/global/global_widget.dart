@@ -27,28 +27,35 @@ PreferredSizeWidget? buildAppbar(int index, BuildContext context) {
         ),
         actions: [
           IconButton(
-              onPressed: () async {
-                bool onRefresh = await Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => BlocProvider<UsersCubit>(
-                      create: (context) => sl<UsersCubit>(),
-                      child: const AddPostScreen(),
-                    ),
+            onPressed: () async {
+              bool onRefresh = await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<UsersCubit>(
+                    create: (context) => sl<UsersCubit>(),
+                    child: const AddPostScreen(),
                   ),
-                );
-                if (onRefresh) {
-                  context.read<PostsCubit>().fetchPosts();
-                }
-              },
-              icon: const Iconify(Ic.outline_add_box)),
+                ),
+              );
+              if (onRefresh) {
+                context.read<PostsCubit>().fetchPosts();
+              }
+            },
+            icon: const Iconify(Ic.outline_add_box),
+          ),
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const NotificationScreen()));
-              },
-              icon: const Icon(Icons.favorite_border)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.favorite_border,
+              color: Colors.black,
+            ),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(

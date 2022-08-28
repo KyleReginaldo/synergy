@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:synergy/core/theme/text_theme.dart';
 import 'package:synergy/firebase_options.dart';
 import 'package:synergy/presentation/cubits/authentication/authentication_cubit.dart';
 import 'package:synergy/presentation/cubits/chat/chat_cubit.dart';
@@ -34,11 +33,11 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(builder: (context, provider, child) {
       return MaterialApp(
         title: 'Synergy',
-        theme: ThemeData(
-          textTheme: ubuntuTextTheme,
-        ),
-        darkTheme: ThemeData.dark(),
-        themeMode: provider.themeMode,
+        // theme: ThemeData(
+        //   textTheme: ubuntuTextTheme,
+        // ),
+        // darkTheme: ThemeData.dark(),
+        // themeMode: provider.themeMode,
         debugShowCheckedModeBanner: false,
         home: MultiBlocProvider(
           providers: [

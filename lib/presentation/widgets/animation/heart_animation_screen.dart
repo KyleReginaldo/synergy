@@ -27,7 +27,7 @@ class _HeartAnimationWidgetState extends State<HeartAnimationWidget>
     final halfDuration = widget.duration.inMilliseconds ~/ 2;
     controller = AnimationController(
         vsync: this, duration: Duration(milliseconds: halfDuration));
-    scale = Tween<double>(begin: 1, end: 1.2).animate(controller);
+    scale = Tween<double>(begin: 0, end: 1).animate(controller);
   }
 
   @override
@@ -42,7 +42,7 @@ class _HeartAnimationWidgetState extends State<HeartAnimationWidget>
     if (widget.isAnimating) {
       await controller.forward();
       await controller.reverse();
-      await Future.delayed(const Duration(milliseconds: 300));
+      await Future.delayed(const Duration(milliseconds: 200));
       if (widget.onEnd != null) {
         widget.onEnd!();
       }
