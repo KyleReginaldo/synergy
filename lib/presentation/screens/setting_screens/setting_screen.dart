@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:general/general.dart';
-import 'package:synergy/presentation/core/theme_container.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -37,12 +36,6 @@ class _SettingScreenState extends State<SettingScreen> {
             rowBuilder(() {}, const Icon(Icons.person), 'Account'),
             rowBuilder(() {}, const Icon(Icons.help), 'Help'),
             rowBuilder(() {}, const Icon(Icons.info), 'About'),
-            rowBuilder(() {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ThemeController()));
-            }, const Icon(Icons.dark_mode), 'Theme'),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
               child:

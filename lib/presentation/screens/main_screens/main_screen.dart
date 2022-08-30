@@ -36,22 +36,14 @@ class _MainScreenState extends State<MainScreen> {
       appBar: buildAppbar(_selectedIndex, context),
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: IconThemeData(color: Colors.greenAccent),
+        unselectedIconTheme: IconThemeData(color: Colors.black),
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
         items: [
-          BottomNavigationBarItem(
-              icon: Iconify(Mdi.home_variant,
-                  color: _selectedIndex == 0 ? Colors.black : Colors.grey),
-              label: ''),
-          BottomNavigationBarItem(
-              icon: Iconify(Uil.search,
-                  color: _selectedIndex == 1 ? Colors.black : Colors.grey),
-              label: ''),
-          BottomNavigationBarItem(
-              icon: Iconify(Bi.person_circle,
-                  color: _selectedIndex == 2 ? Colors.black : Colors.grey),
-              label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
         ],
       ),
     );

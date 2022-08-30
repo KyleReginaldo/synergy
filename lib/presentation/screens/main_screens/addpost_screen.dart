@@ -35,7 +35,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
       allowedExtensions: ['jpg', 'png'],
     );
 
-    print('name : ${result!.names}');
     if (result != null) {
       setState(() {
         isLoading = true;
@@ -119,9 +118,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
-                        child: Image.network(
-                          state.user.url,
-                          height: 54,
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(state.user.url),
+                          radius: 25,
                         ),
                       ),
                       Expanded(
@@ -145,16 +144,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   ),
                   const SizedBox(height: 16),
                   if (file != null)
-                    SizedBox(
-                      width: double.infinity,
-                      child: isLoading
-                          ? const CircularProgressIndicator()
-                          : Image.file(
-                              file!,
-                              height: 420,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                    RepaintBoundary(
+                      child: SizedBox(
+                          width: double.infinity,
+                          child: isLoading
+                              ? const CircularProgressIndicator()
+                              : Image.file(
+                                  file!,
+                                  height: 420,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                )),
                     )
                   else
                     isLoading

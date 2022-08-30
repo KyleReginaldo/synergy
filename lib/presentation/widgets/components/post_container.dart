@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/cil.dart';
+import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:synergy/domain/entity/post_entity.dart';
 import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
 import 'package:synergy/presentation/screens/main_screens/comment_screen.dart';
+import 'package:iconify_flutter/icons/ph.dart';
 
 import '../../../dependency.dart';
 import '../../cubits/comment/comment_cubit.dart';
@@ -117,60 +119,28 @@ class _PostContainerState extends State<PostContainer> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
+                                    containerBuilder(const Icon(Icons.share)),
+                                    containerBuilder(
+                                        const Iconify(Ph.link_simple_duotone)),
+                                    containerBuilder(
+                                        const Icon(Icons.qr_code_2)),
                                     Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1, color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      child: const Icon(
-                                        Icons.share,
-                                        size: 30,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1, color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      child: const Icon(
-                                        Icons.link,
-                                        size: 30,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1, color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      child: const Icon(
-                                        Icons.qr_code,
-                                        size: 30,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1, color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      child: const Icon(
-                                        Icons.report_sharp,
-                                        color: Colors.red,
-                                        size: 30,
-                                      ),
-                                    )
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1, color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        child: const Iconify(
+                                          Ic.baseline_report,
+                                          color: Colors.red,
+                                        ) // widget
+                                        )
                                   ],
                                 ),
-                                const CustomText('Dont show for this hashtag',
+                                const CustomText('Hide Post',
                                     weight: FontWeight.w600),
-                                const CustomText('Unfollow this hashtag',
+                                const CustomText('Unfollow this person',
                                     weight: FontWeight.w600)
                               ],
                             ),
@@ -187,7 +157,6 @@ class _PostContainerState extends State<PostContainer> {
               setState(() {
                 isHeartAnimation = true;
               });
-
               context.read<PostsCubit>().likePost(widget.post.postId,
                   FirebaseAuth.instance.currentUser!.uid, widget.post.likes);
             },
@@ -207,9 +176,9 @@ class _PostContainerState extends State<PostContainer> {
                   onEnd: () => setState(() {
                     isHeartAnimation = false;
                   }),
-                  child: const Icon(
+                  child: Icon(
                     Icons.favorite,
-                    color: Colors.black,
+                    color: Colors.red.shade700,
                     size: 80,
                   ),
                 ),
@@ -228,9 +197,9 @@ class _PostContainerState extends State<PostContainer> {
                       );
                 },
                 child: isFavorite()
-                    ? const Icon(
+                    ? Icon(
                         Icons.favorite,
-                        color: Colors.black,
+                        color: Colors.red.shade700,
                       )
                     : const Icon(Icons.favorite_border),
               ),
@@ -282,4 +251,13 @@ class _PostContainerState extends State<PostContainer> {
       ),
     );
   }
+}
+
+Widget containerBuilder(Widget icon) {
+  return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border.all(width: 1, color: Colors.black),
+          borderRadius: BorderRadius.circular(50)),
+      child: icon);
 }

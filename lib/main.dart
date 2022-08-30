@@ -33,11 +33,6 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(builder: (context, provider, child) {
       return MaterialApp(
         title: 'Synergy',
-        // theme: ThemeData(
-        //   textTheme: ubuntuTextTheme,
-        // ),
-        // darkTheme: ThemeData.dark(),
-        // themeMode: provider.themeMode,
         debugShowCheckedModeBanner: false,
         home: MultiBlocProvider(
           providers: [

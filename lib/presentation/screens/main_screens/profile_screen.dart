@@ -1,11 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general/general.dart';
-import 'package:synergy/presentation/cubits/posts/posts_cubit.dart';
-import 'package:synergy/presentation/screens/main_screens/edit_profile_screen.dart';
 
-import '../../../dependency.dart';
+import '../../widgets/profile/edit_profile.dart';
 import '../../widgets/tabbar.dart';
 import '../../widgets/profile/profile_container.dart';
 
@@ -36,23 +32,23 @@ class _ProfileScreenState extends State<ProfileScreen>
             children: [
               const ProfileContainer(),
               const SizedBox(height: 32),
-              BtnFilled(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider<PostsCubit>(
-                        create: (context) => sl<PostsCubit>()
-                          ..getPost(FirebaseAuth.instance.currentUser!.uid),
-                        child: const EditProfileScreen(),
-                      ),
-                    ),
-                  );
-                },
-                text: 'edit profile',
-                color: Colors.black,
-                radius: 4,
-                width: MediaQuery.of(context).size.width,
+              Column(
+                children: [
+                  BtnFilled(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const EditProfileScreen(),
+                        ),
+                      );
+                    },
+                    text: 'edit profile',
+                    color: Colors.black,
+                    radius: 4,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ],
               ),
             ],
           ),

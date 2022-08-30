@@ -3,7 +3,9 @@ import 'package:general/widgets/text.dart';
 import 'package:general/widgets/textfield.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
+  const EditProfileScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -34,7 +36,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleAvatar(radius: 50),
+              const CircleAvatar(backgroundImage: NetworkImage(''), radius: 50),
               const SizedBox(height: 15),
               const CustomText(
                 'Change Profile Picture',
